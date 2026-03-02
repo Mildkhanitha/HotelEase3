@@ -1,7 +1,11 @@
-module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('Room', {
-        roomType: { type: DataTypes.STRING, allowNull: false },
-        pricePerNight: { type: DataTypes.INTEGER, allowNull: false },
-        availability: { type: DataTypes.BOOLEAN, defaultValue: true }
-    });
+const { DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
+  return sequelize.define('Room', {
+    room_type: DataTypes.STRING,
+    price_per_night: DataTypes.FLOAT,
+    max_occupancy: DataTypes.INTEGER,
+    availability: { type: DataTypes.BOOLEAN, defaultValue: true },
+    room_image_url: DataTypes.STRING
+  });
 };

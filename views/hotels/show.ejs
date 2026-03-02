@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <div class="card">
+    <h2><%= hotel.hotel_name %></h2>
+
+    <p><strong>ที่ตั้ง:</strong> <%= hotel.location %></p>
+    <p><strong>ที่อยู่:</strong> <%= hotel.address %></p>
+    <p><strong>คะแนน:</strong> ⭐ <%= hotel.rating %></p>
+    <p><strong>รายละเอียด:</strong> <%= hotel.description %></p>
+
+    <a href="/hotels" class="btn btn-primary">กลับ</a>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

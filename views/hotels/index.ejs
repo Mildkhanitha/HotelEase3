@@ -1,36 +1,39 @@
 <%- include('../partials/header') %>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>รายชื่อโรงแรม</h2>
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">+ เพิ่มโรงแรม</button>
-</div>
+<div class="container">
+  <div class="card">
+    <h2>รายการโรงแรม</h2>
 
-<div class="card shadow-sm">
-    <table class="table table-hover mb-0">
-        <thead class="table-dark">
-            <tr>
-                <th>ชื่อโรงแรม</th>
-                <th>ที่ตั้ง</th>
-                <th>ระดับดาว</th>
-                <th>จัดการ</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% hotels.forEach(hotel => { %>
-            <tr>
-                <td><%= hotel.hotelName %></td>
-                <td><%= hotel.location %></td>
-                <td><%= '⭐'.repeat(hotel.rating) %></td>
-                <td>
-                    <a href="/hotels/<%= hotel.id %>/edit" class="btn btn-sm btn-outline-primary">แก้ไข</a>
-                    <form action="/hotels/<%= hotel.id %>?_method=DELETE" method="POST" class="d-inline">
-                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('ยืนยันการลบ?')">ลบ</button>
-                    </form>
-                </td>
-            </tr>
-            <% }) %>
-        </tbody>
+    <a href="/hotels/new" class="btn btn-success">+ เพิ่มโรงแรม</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ชื่อโรงแรม</th>
+          <th>ที่ตั้ง</th>
+          <th>คะแนน</th>
+          <th>จัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% hotels.forEach(hotel => { %>
+          <tr>
+            <td><%= hotel.hotel_name %></td>
+            <td><%= hotel.location %></td>
+            <td>⭐ <%= hotel.rating %></td>
+            <td>
+              <a href="/hotels/<%= hotel.id %>" class="btn btn-primary">ดู</a>
+              <a href="/hotels/<%= hotel.id %>/edit" class="btn btn-success">แก้ไข</a>
+
+              <form action="/hotels/<%= hotel.id %>?_method=DELETE" method="POST" style="display:inline;">
+                <button class="btn btn-danger" onclick="return confirm('ลบโรงแรมนี้?')">ลบ</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
     </table>
+  </div>
 </div>
 
 <%- include('../partials/footer') %>
