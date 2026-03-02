@@ -1,10 +1,43 @@
 const router = require('express').Router();
+const { Op } = require('sequelize');
 const { Hotel } = require('../models');
 
 // index
 router.get('/', async (req, res) => {
-  const hotels = await Hotel.findAll();
-  res.render('hotels/index', { hotels });
+  const { location, minPrice, maxPrice } = req.query;
+
+  let whereClause = {};
+
+  // ค้นหาตามจังหวัด
+  if (location) {
+    whereClause.location = {
+      [Op.like]: `%${location}%`
+    };
+  }
+
+  // ค้นหาตามช่วงราคา
+  if (minPrice && maxPrice) {
+    whereClause.price_per_night = {
+      [Op.between]: [minPrice, maxPrice]
+    };
+  } else if (minPrice) {
+    whereClause.price_per_night = {
+      [Op.gte]: minPrice
+    };
+  } else if (maxPrice) {
+    whereClause.price_per_night = {
+      [Op.lte]: maxPrice
+    };
+  }
+
+  const hotels = await Hotel.findAll({
+    where: whereClause
+  });
+
+  res.render('hotels/index', {
+    hotels,
+    requestQuery: req.query
+  });
 });
 
 // create form
@@ -41,5 +74,6 @@ router.delete('/:id', async (req, res) => {
   await Hotel.destroy({ where: { id: req.params.id } });
   res.redirect('/hotels');
 });
+
 
 module.exports = router;

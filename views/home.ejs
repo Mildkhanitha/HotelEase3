@@ -1,14 +1,15 @@
 <%- include('partials/header') %>
 
-<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border">
-    <div class="container-fluid py-5 text-center">
-        <h1 class="display-5 fw-bold text-primary">ยินดีต้อนรับสู่ HotelEase3</h1>
-        <p class="col-md-8 fs-4 mx-auto text-muted">ระบบจัดการการจองห้องพักในโรงแรมที่ครบวงจร ใช้งานง่าย และรวดเร็ว</p>
-        <div class="mt-4">
-            <a href="/rooms" class="btn btn-primary btn-lg px-4 me-md-2">จองห้องพักเลย</a>
-            <a href="/hotels" class="btn btn-outline-secondary btn-lg px-4">ดูรายชื่อโรงแรม</a>
-        </div>
-    </div>
+<div class="hero">
+  <h1>ค้นหาโรงแรมที่ใช่สำหรับคุณ</h1>
+  <p>เปรียบเทียบราคา ดูรีวิว และจองห้องพักได้ทันที</p>
+
+  <div class="search-box">
+    <input type="text" placeholder="สถานที่ / จังหวัด">
+    <input type="date">
+    <input type="date">
+    <button class="search-btn">ค้นหา</button>
+  </div>
 </div>
 
 <%- include('partials/footer') %>

@@ -3,6 +3,7 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   return sequelize.define('Hotel', {
     hotel_name: DataTypes.STRING,
+    price_per_night: DataTypes.INTEGER,
     location: DataTypes.STRING,
     address: DataTypes.STRING,
     rating: DataTypes.FLOAT,

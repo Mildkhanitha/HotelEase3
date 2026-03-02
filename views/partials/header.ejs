@@ -1,17 +1,35 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HotelEase3</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
 
-<div class="navbar">
-  <div>
+<nav class="navbar">
+  <div class="logo">
     <a href="/">🏨 HotelEase3</a>
   </div>
 
-  <div>
-    <% if (user && user.role === 'admin') { %>
+  <div class="nav-right">
+    <% if (!user) { %>
+      <a href="/hotels">โรงแรม</a>
+      <a href="/login" class="nav-btn">เข้าสู่ระบบ</a>
+      <a href="/register" class="nav-btn-outline">สมัครสมาชิก</a>
+
+    <% } else if (user.role === 'admin') { %>
+      <a href="/dashboard">Dashboard</a>
       <a href="/hotels">จัดการโรงแรม</a>
       <a href="/rooms">จัดการห้อง</a>
       <a href="/reports">รายงาน</a>
+      <a href="/logout" class="nav-btn logout-btn">ออกจากระบบ</a>
+
     <% } else { %>
-      <a href="/hotels">ดูโรงแรม</a>
+      <a href="/hotels">โรงแรม</a>
       <a href="/bookings">การจองของฉัน</a>
+      <a href="/logout" class="nav-btn logout-btn">ออกจากระบบ</a>
     <% } %>
   </div>
-</div>
+</nav>

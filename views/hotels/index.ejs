@@ -1,39 +1,47 @@
 <%- include('../partials/header') %>
 
 <div class="container">
-  <div class="card">
-    <h2>รายการโรงแรม</h2>
 
-    <a href="/hotels/new" class="btn btn-success">+ เพิ่มโรงแรม</a>
+  <h2 class="section-title">ค้นหาโรงแรม</h2>
 
-    <table>
-      <thead>
-        <tr>
-          <th>ชื่อโรงแรม</th>
-          <th>ที่ตั้ง</th>
-          <th>คะแนน</th>
-          <th>จัดการ</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% hotels.forEach(hotel => { %>
-          <tr>
-            <td><%= hotel.hotel_name %></td>
-            <td><%= hotel.location %></td>
-            <td>⭐ <%= hotel.rating %></td>
-            <td>
-              <a href="/hotels/<%= hotel.id %>" class="btn btn-primary">ดู</a>
-              <a href="/hotels/<%= hotel.id %>/edit" class="btn btn-success">แก้ไข</a>
+  <!-- FILTER BAR -->
+  <form method="GET" action="/hotels" class="filter-bar">
+    <input type="text" name="location" placeholder="จังหวัด / สถานที่"
+      value="<%= requestQuery.location || '' %>">
 
-              <form action="/hotels/<%= hotel.id %>?_method=DELETE" method="POST" style="display:inline;">
-                <button class="btn btn-danger" onclick="return confirm('ลบโรงแรมนี้?')">ลบ</button>
-              </form>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
+    <input type="number" name="minPrice" placeholder="งบต่ำสุด"
+      value="<%= requestQuery.minPrice || '' %>">
+
+    <input type="number" name="maxPrice" placeholder="งบสูงสุด"
+      value="<%= requestQuery.maxPrice || '' %>">
+
+    <button type="submit" class="search-btn">ค้นหา</button>
+  </form>
+
+  <h2 class="section-title">โรงแรมทั้งหมด</h2>
+
+  <div class="hotel-grid">
+    <% hotels.forEach(hotel => { %>
+      <div class="hotel-card">
+        <img src="<%= hotel.image_url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945' %>">
+
+        <div class="hotel-info">
+          <h3><%= hotel.hotel_name %></h3>
+          <p>📍 <%= hotel.location %></p>
+          <p>⭐ <%= hotel.rating || 'ไม่มีคะแนน' %></p>
+
+          <div class="price">
+            ฿<%= hotel.price_per_night || 1500 %> / คืน
+          </div>
+
+          <a href="/hotels/<%= hotel.id %>" class="card-btn">
+            ดูรายละเอียด
+          </a>
+        </div>
+      </div>
+    <% }) %>
   </div>
+
 </div>
 
 <%- include('../partials/footer') %>

@@ -1,0 +1,70 @@
+<%- include('../partials/header') %>
+<div class="container">
+
+  <div class="admin-header">
+    <div>
+      <h1>จัดการโรงแรม</h1>
+      <p style="color:#64748b;margin-top:6px;">
+        เพิ่ม แก้ไข และลบข้อมูลโรงแรม
+      </p>
+    </div>
+
+    <a href="/hotels/new" class="btn-primary">
+      + เพิ่มโรงแรม
+    </a>
+  </div>
+
+
+  <!-- Stats -->
+  <div class="stats-simple">
+    <div class="stat-box">
+      <h2><%= hotels.length %></h2>
+      <span>จำนวนโรงแรม</span>
+    </div>
+
+    <div class="stat-box">
+      <h2>120</h2>
+      <span>จำนวนห้อง</span>
+    </div>
+
+    <div class="stat-box">
+      <h2>฿ 250,000</h2>
+      <span>รายได้รวม</span>
+    </div>
+  </div>
+
+
+  <!-- Grid -->
+  <div class="hotel-grid">
+    <% hotels.forEach(hotel => { %>
+      <div class="hotel-card">
+
+        <img src="<%= hotel.image_url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945' %>">
+
+        <div class="hotel-info">
+          <h3><%= hotel.name %></h3>
+          <p><%= hotel.location %></p>
+
+          <div class="price">
+            ฿ <%= hotel.price_per_night || 0 %> / คืน
+          </div>
+
+          <div style="margin-top:15px; display:flex; gap:10px;">
+            <a href="/hotels/<%= hotel.id %>/edit" class="btn-edit">
+              แก้ไข
+            </a>
+
+            <form action="/hotels/<%= hotel.id %>?_method=DELETE" method="POST">
+              <button class="btn-delete">
+                ลบ
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+</div>
+<%- include('../partials/footer') %>
