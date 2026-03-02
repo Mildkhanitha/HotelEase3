@@ -6,6 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 
 const db = require('./models');
+const hotelRoutes = require('./routes/hotelRoutes');
 const app = express();
 
 // 1. ตั้งค่า Template Engine (EJS)
@@ -43,6 +44,7 @@ const PORT = process.env.PORT || 3000;
 db.sequelize.sync({ force: false }).then(() => {
     console.log('✅ Database synced!');
 });
+app.use('/hotels', hotelRoutes);
 app.listen(PORT, () => {
     console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
